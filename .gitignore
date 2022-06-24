@@ -1,0 +1,6 @@
+# OS files
+*.DS_Store
+
+# IDE generated files
+.vscode/
+.vs/
