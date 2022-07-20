@@ -1,4 +1,4 @@
-﻿namespace AnteaterStudios.ExtraNet.ExtensionMethods;
+﻿namespace AnteaterStudios.ExtraNet;
 public static class ExtensionMethods
 {
     public static T[] Set<T>(this T[] self, int index, params T[] values)
