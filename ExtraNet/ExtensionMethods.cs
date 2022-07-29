@@ -9,7 +9,7 @@ public static class ExtensionMethods
 
     public static bool AreAllEqual<T>(this IEnumerable<T> source)
     {
-        return (!source.Any()) || source.Distinct().Count() == 1;
+        return source.Distinct().Count() <= 1;
     }
 
     public static bool HasDefaultConstructor(this Type t)
