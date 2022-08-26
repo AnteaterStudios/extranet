@@ -1,30 +1,32 @@
 using System.Globalization;
 
 namespace AnteaterStudios.ExtraNet;
-public class ConstrainedValue<T> where T : IComparable<T>
+public class ConstrainedValue<T> : ValueRange<T> where T : IComparable<T>
 {
-    public Range<T> Range { get; }
-    public T Value { get; private set; }
+    public override Range<T> Range { get; }
+    private T _value;
+    public override T Value { get => _value; }
 
     public ConstrainedValue(Range<T> range, T value)
     {
         CheckMinGreaterThanMax(range.Min, range.Max);
 
+        _value = range.Min;
         Range = range;
-        Value = range.Min;
     }
 
     public ConstrainedValue(T min, T max, T value)
     {
         CheckMinGreaterThanMax(min, max);
 
-        Value = value.ConstrainToRange(min, max);
+        _value = value.ConstrainToRange(min, max);
         Range = new Range<T>(min, max);
     }
 
-    public void Set(T value)
+    public override T Set(T value)
     {
-        Value = value.ConstrainToRange(Range.Min, Range.Max);
+        _value = value.ConstrainToRange(Range.Min, Range.Max);
+        return Value;
     }
 
     private void CheckMinGreaterThanMax(T min, T max)
